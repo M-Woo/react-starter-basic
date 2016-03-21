@@ -1,7 +1,15 @@
 var gulp = require('gulp');
+var eslint = require('gulp-eslint');
 var browserify = require('browserify');
 var babelify = require('babelify');
 var source = require('vinyl-source-stream');
+
+gulp.task('lint', function() {
+  return gulp.src(['src/**/*.jsx'])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+})
 
 gulp.task('build', function() {
   browserify({
@@ -15,4 +23,4 @@ gulp.task('build', function() {
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default', ['build']);
+gulp.task('default', ['lint', 'build']);

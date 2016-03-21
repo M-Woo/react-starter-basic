@@ -1,9 +1,14 @@
-var React = require('react');
+const React = require('react');
 
-var Header = React.createClass({
-  render: function() {
+class Header extends React.Component {
+  render() {
+    if (!this.props.name) {
+      return null;
+    }
     return <h1>{this.props.name}</h1>;
   }
-});
+}
+
+Header.propTypes = { name: React.propTypes.string };
 
 module.exports = Header;
